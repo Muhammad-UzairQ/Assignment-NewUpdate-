@@ -1,0 +1,85 @@
+package com.TA;
+
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
+import io.cucumber.java.en.Then;
+import net.serenitybdd.screenplay.Performable;
+import net.serenitybdd.screenplay.PerformsTasks;
+import net.serenitybdd.screenplay.actions.Click;
+//import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.actions.Open;
+
+import net.serenitybdd.screenplay.questions.Text;
+
+import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
+import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
+
+public class LoginSteps {
+   String text;
+    @Given("user is on Weather Shopper page")
+    public void UserIsOnWeatherPage(){
+        theActorInTheSpotlight().attemptsTo(Open.url("https://weathershopper.pythonanywhere.com/"));
+        
+    }
+
+    @And("user checks temperature")
+    public void userChecksTemperature(){
+       this.text= Text.of("//div[contains(@class,'row')]//span[contains(@id,'temperature')]").asString().answeredBy(theActorInTheSpotlight());
+        System.out.println("The Temperature is ="+text);
+        char[] ch = text.toCharArray();
+        int len=text.length();
+        int i;
+        if(len==4){
+            i=Character.getNumericValue(ch[0]);
+            System.out.println("The Temperature is"+i);
+        }else{
+            String n;
+            StringBuilder sb = new StringBuilder();
+            sb.append(ch[0]);
+            sb.append(ch[1]);
+            n = sb.toString();
+            i = Integer.parseInt(n);
+            System.out.println("The Temperature is"+i);
+        }
+
+        if(i<19){
+
+        }else if(i>34){
+
+        }
+
+    }
+
+    @When("user temperature is below 19")
+    public void TemperatureBelow() {
+        theActorInTheSpotlight().attemptsTo(
+                Click.on("//div[contains(@class,'row')]//*[contains(text(),'Buy moisturizers')]")
+        );
+    }
+
+
+    @Then("user clicks buy moisturizers")
+    public void userBuyItem() {
+        theActorInTheSpotlight().attemptsTo(
+                Click.on("//div[contains(@class,'row')]//div[contains(@class,'text')]//p[text()='Vassily Aloe Attack']/following-sibling::button")
+        );
+        }
+
+
+    @When("temperature is above 34")
+    public void TemperatureAbove() {
+        theActorInTheSpotlight().attemptsTo(
+                Click.on("//div[contains(@class,'row')]//*[contains(text(),'Buy sunscreens')]")
+        );
+    }
+
+
+    @Then("user clicks buy sunscreens")
+    public void userBuySunscreens() {
+        theActorInTheSpotlight().attemptsTo(
+       //         Click.on("//div[contains(@class,'row')]//div[contains(@class,'text')]//p[text()='Vassily Aloe Attack']/following-sibling::button")
+        );
+    }
+
+}
