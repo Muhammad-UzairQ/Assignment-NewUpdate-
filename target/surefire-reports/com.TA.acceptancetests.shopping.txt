@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.TA.acceptancetests.shopping
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 44.117 s - in com.TA.acceptancetests.shopping

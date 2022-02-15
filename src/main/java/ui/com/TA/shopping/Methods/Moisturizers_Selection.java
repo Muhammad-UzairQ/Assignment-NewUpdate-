@@ -1,5 +1,6 @@
 package ui.com.TA.shopping.Methods;
 
+import net.serenitybdd.screenplay.actions.Click;
 import ui.com.TA.shopping.user_interfaces.Moisturizers_Interface;
 
 import java.util.ArrayList;
@@ -30,8 +31,11 @@ public class Moisturizers_Selection {
 
             val=obj.min((ArrayList<Integer>) price_aloe);
 
+            theActorInTheSpotlight().attemptsTo(
+                    Click.on(Moisturizers_Interface.ALOE_LEAST_PRICE.of(String.valueOf(val)))
+            );
             Ret=val;
-            Moisturizers_Interface.selectItem(val,1);
+
 
         }else{
             Moisturizers_Interface.ALMOND_PRICE.resolveAllFor(theActorInTheSpotlight()).forEach(element1 -> {
@@ -41,8 +45,12 @@ public class Moisturizers_Selection {
             for (String li1 : Price_Almond) {
                 price_almond.add(Convert.convertStringToInt(li1));
             }
+
             val1=obj.min((ArrayList<Integer>) price_almond);
-            Moisturizers_Interface.selectItem(val1,2);
+            theActorInTheSpotlight().attemptsTo(
+                    Click.on(Moisturizers_Interface.ALMOND_LEAST_PRICE.of(String.valueOf(val1)))
+            );
+
             Ret=val1;
         }
         return Ret;

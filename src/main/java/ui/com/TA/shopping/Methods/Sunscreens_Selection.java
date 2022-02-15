@@ -1,5 +1,6 @@
 package ui.com.TA.shopping.Methods;
 
+import net.serenitybdd.screenplay.actions.Click;
 import ui.com.TA.shopping.user_interfaces.Sunscreens;
 
 import java.util.ArrayList;
@@ -28,8 +29,11 @@ public class Sunscreens_Selection {
                 price_spf50.add(Convert.convertStringToInt(li));}
 
             val=obj.min((ArrayList<Integer>) price_spf50);
+            theActorInTheSpotlight().attemptsTo(
+                    Click.on(Sunscreens.SPF50_LEAST_PRICE.of(String.valueOf(val)))
+            );
             Ret=val;
-            Sunscreens.selectItem(val,1);
+
 
         }else{
             Sunscreens.SPF30.resolveAllFor(theActorInTheSpotlight()).forEach(element1 -> {
@@ -40,7 +44,10 @@ public class Sunscreens_Selection {
                 price_spf30.add(Convert.convertStringToInt(li1));}
 
             val1=obj.min((ArrayList<Integer>) price_spf30);
-            Sunscreens.selectItem(val1,2);
+            theActorInTheSpotlight().attemptsTo(
+                    Click.on(Sunscreens.SPF30_LEAST_PRICE.of(String.valueOf(val1)))
+            );
+
             Ret=val1;
         }
 
